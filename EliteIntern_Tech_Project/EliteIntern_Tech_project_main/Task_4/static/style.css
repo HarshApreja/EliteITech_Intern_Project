@@ -1,0 +1,42 @@
+body {
+    font-family: Arial;
+    margin: 20px;
+    background: #f6fff6;
+    color: #0b4c0b;
+}
+
+h1, h2 {
+    color: #0b4c0b;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #d0e6d0;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.add-btn {
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.entry {
+    margin: 10px 0;
+}
+
+input {
+    margin: 5px;
+}
+
+table, th, td {
+    border: 1px solid #bbb;
+    border-collapse: collapse;
+    padding: 8px;
+}

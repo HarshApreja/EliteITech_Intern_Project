@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background: #f4f4f4;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            margin: auto;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diabetes Prediction</h1>
+    <form method="POST" action="/">
+        <input type="number" name="Pregnancies" placeholder="Pregnancies" required><br>
+        <input type="number" name="Glucose" placeholder="Glucose" required><br>
+        <input type="number" name="BloodPressure" placeholder="Blood Pressure" required><br>
+        <input type="number" name="SkinThickness" placeholder="Skin Thickness" required><br>
+        <input type="number" name="Insulin" placeholder="Insulin" required><br>
+        <input type="number" name="BMI" step="0.1" placeholder="BMI" required><br>
+        <input type="number" name="DiabetesPedigreeFunction" step="0.01" placeholder="Diabetes Pedigree Function" required><br>
+        <input type="number" name="Age" placeholder="Age" required><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if result %}
+        <div class="result">{{ result }}</div>
+    {% endif %}
+</body>
+</html>

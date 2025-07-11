@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Programming Solver</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Linear Programming Solver</h1>
+    <form method="post">
+        <div class="section">
+            <h2>Machines</h2>
+            <div id="machines"></div>
+            <button type="button" onclick="addMachine()" class="add-btn">+Add Machine</button>
+        </div>
+        <div class="section">
+            <h2>Products</h2>
+            <div id="products"></div>
+            <button type="button" onclick="addProduct()" class="add-btn">+Add Product</button>
+        </div>
+        <br>
+        <input type="submit" value="Solve">
+    </form>
+
+    {% if solution %}
+    <div class="section">
+        <h2>Filled Data</h2>
+        <table>
+            <tr><th>Product</th><th>Stock</th><th>Demand</th></tr>
+            {% for i in range(table_data['Products']|length) %}
+            <tr>
+                <td>{{ table_data['Products'][i] }}</td>
+                <td>{{ table_data['Stock'][i] }}</td>
+                <td>{{ table_data['Demand'][i] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="section">
+        <h2>Solution</h2>
+        <ul>
+        {% for k, v in solution.items() %}
+            <li>{{ k }}: {{ v }}</li>
+        {% endfor %}
+        </ul>
+        <img src="/{{ graph_path }}" width="400">
+        {% if eq_graph_path %}<img src="/{{ eq_graph_path }}" width="400">{% endif %}
+    </div>
+    {% endif %}
+
+    <script>
+        let machineIndex = 0;
+        let productIndex = 0;
+
+        function addMachine() {
+            const div = document.createElement('div');
+            div.className = 'entry';
+            div.innerHTML = `Machine <input name="machine_name" required> Available Time (hrs): <input name="machine_time" type="number" required step="any"> <button type="button" onclick="this.parentNode.remove()">Remove</button>`;
+            document.getElementById('machines').appendChild(div);
+            machineIndex++;
+        }
+
+        function addProduct() {
+            const div = document.createElement('div');
+            div.className = 'entry';
+            let html = `Product <input name="product_name" required> Stock: <input name="stock" required type="number"> Demand: <input name="demand" required type="number">`;
+            const machineFields = document.getElementsByName("machine_name");
+            for (let j = 0; j < machineFields.length; j++) {
+                html += ` Time on ${machineFields[j].value || 'Machine'+j} <input name="prod_${productIndex}_mach_${j}" type="number" required step="any">`;
+            }
+            html += `<button type="button" onclick="this.parentNode.remove()">Remove</button>`;
+            div.innerHTML = html;
+            document.getElementById('products').appendChild(div);
+            productIndex++;
+        }
+    </script>
+</body>
+</html>
